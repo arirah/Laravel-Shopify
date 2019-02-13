@@ -7,7 +7,7 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Shopify;
-
+use App\Store;
 class HomeController extends Controller
 {
     /**
@@ -66,36 +66,34 @@ class HomeController extends Controller
 
     public function customers()
     {
-        
-        return view('customers');
+        $stores = Store::get();
+        return view('customers')->with('stores',$stores);
     }
 
     public function notify()
     {
-        //$all_products = Shopify::api('products')->all();
-        //print_r($all_products) ;
+        
         return view('notify');
     }
 
     public function productDelete(Request $r)
     {
         $product = Shopify::getProduct($r->product_id);
-        //$product->setTitle('Burton Freestyle 152');
+      
         $product->remove();
-        //echo $r->product_id;
+        
         return redirect('products');
-        // return view('notify');
+        
     }
     public function productUpdate(Request $r)
     {
         $product = Shopify::api('products')->show($product_id = $r->product_id);
-        //$product= $this->getShopify()->api('products')->show($product_id = $r->product_id);
-
+        
         return view('edit-product')->with('product', $product);
     }
     public function productUpdatePost(Request $r)
     {
-        //print_r($r->all());
+       
         $product = Shopify::getProduct($r->product_id);
         $product->setTitle($r->title);
         $product->setBodyHtml($r->body_html);
