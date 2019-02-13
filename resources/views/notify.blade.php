@@ -25,7 +25,7 @@
                         <div class="col-md-6">
                             <label>Email Notification Body</label>
                             <textarea id="emailbody" rows="10" class="form-control">Dear #SHOPUSER# , 
-Your app domain id #DOMAIN# </textarea>
+Your app domain is #DOMAIN# </textarea>
                             <div class="clear">&nbsp;</div>
                             <button class="btn btn-primary"> Send Email </button>
                         </div>
